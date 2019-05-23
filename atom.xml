@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xmidou.com/"/>
-  <updated>2019-05-23T03:27:27.259Z</updated>
+  <updated>2019-05-23T03:36:36.836Z</updated>
   <id>http://www.xmidou.com/</id>
   
   <author>
@@ -21,22 +21,18 @@
     <link href="http://www.xmidou.com/2019/05/23/timg/"/>
     <id>http://www.xmidou.com/2019/05/23/timg/</id>
     <published>2019-05-23T03:21:34.000Z</published>
-    <updated>2019-05-23T03:27:27.259Z</updated>
+    <updated>2019-05-23T03:36:36.836Z</updated>
     
-    <content type="html"><![CDATA[<figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="timg/1.png" alt title>                </div>                <div class="image-caption"></div>            </figure>]]></content>
+    <content type="html"><![CDATA[<figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="1.png" alt title>                </div>                <div class="image-caption"></div>            </figure>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;div class=&quot;overlay&quot;&gt;&lt;/div&gt;
-                   
-      
+      附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面
     
     </summary>
     
+    
+      <category term="tag2" scheme="http://www.xmidou.com/tags/tag2/"/>
     
   </entry>
   
