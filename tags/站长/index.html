@@ -14,7 +14,7 @@
     
     
     
-    <title>泡菜 Blog | 成长的涓流</title>
+    <title>Tags: 站长 | 泡菜 Blog | 成长的涓流</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,7 +23,7 @@
     <meta name="keywords" content>
     <meta property="og:type" content="website">
 <meta property="og:title" content="泡菜 Blog | 成长的涓流">
-<meta property="og:url" content="http://www.xmidou.com/index.html">
+<meta property="og:url" content="http://www.xmidou.com/tags/站长/index.html">
 <meta property="og:site_name" content="泡菜 Blog | 成长的涓流">
 <meta property="og:locale" content="zh-cn">
 <meta name="twitter:card" content="summary">
@@ -62,14 +62,14 @@
     <div class="scroll-wrap flex-col">
       <ul class="nav">
         
-            <li class="waves-block waves-effect active">
+            <li class="waves-block waves-effect">
               <a href="/">
                 <i class="icon icon-lg icon-home"></i>
                 主页
               </a>
             </li>
         
-            <li class="waves-block waves-effect">
+            <li class="waves-block waves-effect active">
               <a href="/tags">
                 <i class="icon icon-lg icon-tags"></i>
                 标签
@@ -87,7 +87,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">泡菜 Blog | 成长的涓流</div>
+        <div class="flex-col header-title ellipsis">Tags: 站长</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -106,37 +106,58 @@
         
     </div>
 </header>
-<header class="content-header index-header">
+<header class="content-header tags-header">
 
     <div class="container fade-scale">
-        <h1 class="title">泡菜 Blog | 成长的涓流</h1>
+        <h1 class="title">Tags: 站长</h1>
         <h5 class="subtitle">
-            
-                
             
         </h5>
     </div>
 
     
+<div class="tabs-bar container">
+    <nav class="tags-list">
+        <a href="/tags" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
+            ">All</a>
+        
+
+            <a href="/tags/爱好/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">爱好</a>
+
+        
+
+            <a href="/tags/站长/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">站长</a>
+
+        
+
+            <a href="/tags/技术/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">技术</a>
+
+        
+    </nav>
+    <!-- PC show more-->
+    <div class="tags-list-more">
+        <a href="javascript:;" onclick="BLOG.tabBar(this)" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
+    </div>
+</div>
+
 
 
 </header>
 
-<div class="container body-wrap">
-
-    <ul class="post-list">
+<div class="container body-wrap fade">
     
-        <li class="post-list-item fade">
-            <article id="post-hexo-use" class="article-card article-type-post" itemprop="blogPost">
+            <div class="waterfall">
+          
 
+            <div class="waterfall-item">
+  <article class="article-card archive-article">
     <div class="post-meta">
-        <time class="post-time" title="2019-05-23 11:39:08" datetime="2019-05-23T03:39:08.000Z" itemprop="datePublished">2019-05-23</time>
+      <time class="post-time" title="2019-05-23 11:39:08" datetime="2019-05-23T03:39:08.000Z" itemprop="datePublished">2019-05-23</time>
 
-        
+      
 
 
     </div>
-
     
 
 
@@ -148,17 +169,6 @@
 
 
 
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-    
-
-        <a href="/2019/05/23/hexo-use/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
     
     <div class="post-footer">
         
@@ -166,21 +176,20 @@
 
     </div>
     
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-first-blog" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-05-06 11:39:08" datetime="2019-05-06T03:39:08.000Z" itemprop="datePublished">2019-05-06</time>
+  </article>
+</div>
 
         
 
+            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2019-05-06 11:39:08" datetime="2019-05-06T03:39:08.000Z" itemprop="datePublished">2019-05-06</time>
+
+      
+
 
     </div>
-
     
 
 
@@ -192,19 +201,6 @@
 
 
 
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        [TOC]
-我的第一个博客的创建一直想做一个自己的Blog，经过曲折的过程，现在终于成形了。在这里记录下创建第一个Blog的过程。
-一、托管的Blog策略​    github pages可以为一个注册用户提供一个主域名的的绑定功能。而且在构建网站面可以使用hexo发布到github还是比较方便了。考虑再三，还是接受了这个方便，毕竟是第一次做网站的同学，也不用考虑太多，先做起来，有经验了后面...
-    
-
-        <a href="/2019/05/06/first-blog/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
     
     <div class="post-footer">
         
@@ -212,15 +208,15 @@
 
     </div>
     
-</article>
-
-        </li>
-    
-    </ul>
-
-    
-
+  </article>
 </div>
+
+        
+            </div>
+        
+    
+</div>
+
 
         <footer class="footer">
     
@@ -266,7 +262,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/&title=泡菜 Blog | 成长的涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/tags/站长/&title=泡菜 Blog | 成长的涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -276,22 +272,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/&title=泡菜 Blog | 成长的涓流&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/tags/站长/&title=泡菜 Blog | 成长的涓流&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/tags/站长/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=泡菜 Blog | 成长的涓流&url=http://www.xmidou.com/&via=http://www.xmidou.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=泡菜 Blog | 成长的涓流&url=http://www.xmidou.com/tags/站长/&via=http://www.xmidou.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/tags/站长/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -302,7 +298,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAAAAAAZai4+AAABTklEQVR42u3aQRKEIAxEUe5/aWZrlUPsTtSpIZ+VpQJvY4iBMeQ2D+14Z3V9buOJBgvWRqwZthXrDIrH1+eCBaszSxlu9X48Qdx3eR8WLFjmcHGYgAUL1q8ChN4XFixYbtLsIl7K5WHB2oKlV3Xq14/Ut2DB+nPWNFtlaTdmgQWrGcsty+pLrLsMw4IFK1eudUtLccj4MiYsWG1Y9aH1VNt4Bxaslqx6uTa3xXKRLsOC1Yalp7A5kPI0WWCCBWs7lhsC9ICihKGLXB4WrMasyg6Im0Ave8GC1ZildKscCYoTaFiwYFV+Pt3RJBwsWG1YyaMA5qaL/aMLC1YzVq60lAsoyZoWLFhtWLmDd26pyA00sGD1ZOkf+V2lKClAwIIF694PPrfNCQsWLHljMl7I3aUdFqzOrNyxAx1kl5BgwWrGcjNYd/Py5poWLFi7sT7IrzX9RE4p9gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAB0ElEQVR42u3ay2rDMBQE0Pz/T6fQVaHYmdGrLhytQpCVoywG6V6/XvF4f4+fn3+Pq6eu5lw9tWDg4uJOc9+342rp+5ntBhIDLi7ueW4eXnnCJN/nBlxc3Gdy29BJVsDFxf3v3OT4cn8kyufj4uI+gZtcftrAuj8ebb+r4eLiTnDHCqZrP2+v7+Li4i7qSow1S9rSSfHruLi4R7j5RSUvoc4XVT+sg4uLu5nbNjvbA8rYBeZDhOHi4m7mjl1+ZiIpPzDl4YiLi7uWOxZkbdiNtUyW5S4uLm7JTW4WY+mYx9lYGwYXF3c3Nz++tMWUfMNF4RUXF/cIN3kgX3ospJY1XHFxcRdxk0XHtpTHVrFVXFzczdxkal6qyF/RaAsiuLi4f8WdOei0L14kxdnLVgouLu5m7tglJJmZ/xGDBVNcXNxt3LZwmR+J2oJI1KbFxcU9yJ2pUt5z8+ZKFJq4uLgHuflojz4zUVh0e3BxcZdy20DJCyh5ITVv4eDi4p7ktgWLZN9t8OUXMFxc3JPcJGjyNuqqy8+Ht0VwcXEfwM2bqe1LG0Ug4uLiPp47UwRpyyi4uLjnuflCbYs0KXwU0YmLi3uEO9ZkbZsuycEIFxf3Adwvu6G0e/sCrjMAAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
