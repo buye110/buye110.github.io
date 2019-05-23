@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>本地文件检索设计 | 知识涓流</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计,开发">
+    <meta name="description" content="附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面">
+<meta name="keywords" content="设计,开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本地文件检索设计">
+<meta property="og:url" content="http://www.xmidou.com/2019/05/23/design-searchfile/index.html">
+<meta property="og:site_name" content="知识涓流">
+<meta property="og:description" content="附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://www.xmidou.com/2019/05/23/design-searchfile/design-file-search-1.png">
+<meta property="og:updated_time" content="2019-05-23T10:38:47.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="本地文件检索设计">
+<meta name="twitter:description" content="附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面">
+<meta name="twitter:image" content="http://www.xmidou.com/2019/05/23/design-searchfile/design-file-search-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="知识涓流" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">泡菜</h5>
+          <a href="mailto:buye110@hotmail.com" title="buye110@hotmail.com" class="mail">buye110@hotmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">本地文件检索设计</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">本地文件检索设计</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-23T10:34:16.000Z" itemprop="datePublished" class="page-time">
+  2019-05-23
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一-操作系统类型"><span class="post-toc-number">1.</span> <span class="post-toc-text">(一)操作系统类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二-需求描述"><span class="post-toc-number">2.</span> <span class="post-toc-text">(二)需求描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#依赖工具"><span class="post-toc-number">3.</span> <span class="post-toc-text">依赖工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三-web微服务"><span class="post-toc-number">4.</span> <span class="post-toc-text">(三)web微服务</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-design-searchfile" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">本地文件检索设计</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-23 18:34:16" datetime="2019-05-23T10:34:16.000Z" itemprop="datePublished">2019-05-23</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>[TOC]</p>
+<h2 id="一-操作系统类型"><a href="#一-操作系统类型" class="headerlink" title="(一)操作系统类型"></a>(一)操作系统类型</h2><p>文件的检索功能需要包含:</p>
+<ul>
+<li><p>windows操作系统</p>
+</li>
+<li><p>liunx操作系统</p>
+</li>
+</ul>
+<h2 id="二-需求描述"><a href="#二-需求描述" class="headerlink" title="(二)需求描述"></a>(二)需求描述</h2><p>要求：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 提供java的SDK包，以maven的方式引入到业务系统中使用。</span><br><span class="line"></span><br><span class="line">- 调用查询的接口</span><br><span class="line"></span><br><span class="line">- 指定路径下的所有子目录的检索（如：D:\test或/root/test）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>检索条件：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 文件名搜索</span><br><span class="line"></span><br><span class="line">- 文件内容搜索</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>检索范围：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- 指定文件大小</span><br><span class="line"></span><br><span class="line">- 指定文件扩展名</span><br><span class="line"></span><br><span class="line">- 指定最后更新时间</span><br><span class="line"></span><br><span class="line">- 支持全文及文件件名的模糊搜索</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>实际应用的场景：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每天文件的生成的数量为800个左右，单个文件大小为200K-300K，极少情况个别文件大小在100M-500M;</span><br></pre></td></tr></table></figure>
+<p>文件格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doc、docx、xml、txt、pdf、jpg、png</span><br></pre></td></tr></table></figure>
+<p>特殊约定：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- pdf、doc、docx等内嵌图片的内容无法支持内容的检索；</span><br><span class="line"></span><br><span class="line">- jpg、png等图片类文件无法支持内容检索；</span><br><span class="line"></span><br><span class="line">- 视频文件无法支持内容检索；</span><br><span class="line"></span><br><span class="line">- 音频文件无法支持内容检索；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="依赖工具"><a href="#依赖工具" class="headerlink" title="依赖工具"></a>依赖工具</h2><p>1、liunx依赖系统自有带的命令行进行文件检索(find、grep、locate)</p>
+<p>2、windws操作系统利用第三方搜索工具：everything-SDK-windows</p>
+<h2 id="三-web微服务"><a href="#三-web微服务" class="headerlink" title="(三)web微服务"></a>(三)web微服务</h2><p>客户端SDK和服务器通过http方式交互；</p>
+<p>客户端：</p>
+<p>提供一个客户端的SDK，并定义搜索接口，指定传入参数：</p>
+<p>1、检索路径（必填）</p>
+<p>2、文件名（文件名和文件内容选填其一）</p>
+<p>3、文件内容（文件名和文件内容选填其一）</p>
+<p>4、指定文件大小（选填）</p>
+<p>5、指定文件扩展名（选填）</p>
+<p>6、指定最近多少时间内更新的文件（选填）</p>
+<p>服务端：</p>
+<p>创建spring boot web程序，包装http接口，服务器调用：</p>
+<p>windows操作系统：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过everything-sdk检索本地磁盘，返回文件路径和文件名列表</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>liunx操作系统：</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行shell命令(find、grep、locate)检索本地磁盘，返回文件路径和文件名列表</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>服务拓朴图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="design-file-search-1.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>结语：</p>
+<p>客户端+服务端的设计模式，主要为了解决跨服务器的远程磁盘检索的要求；</p>
+<p>优势：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个客户端可以在多个服务器进行文件检索；</span><br></pre></td></tr></table></figure>
+<p>缺点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">需要将服务端部署到要检索磁盘的服务器上；</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-23T10:38:47.582Z" itemprop="dateUpdated">2019-05-23 18:38:47</time>
+</span><br>
+
+
+        
+        作者：泡菜
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.xmidou.com">
+            <img src="/img/avatar.jpg" alt="泡菜">
+            泡菜
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发/">开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/2019/05/23/design-searchfile/&title=《本地文件检索设计》 — 知识涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/2019/05/23/design-searchfile/&title=《本地文件检索设计》 — 知识涓流&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/2019/05/23/design-searchfile/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《本地文件检索设计》 — 知识涓流&url=http://www.xmidou.com/2019/05/23/design-searchfile/&via=http://www.xmidou.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/2019/05/23/design-searchfile/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/05/23/hexo-use/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">(一)hexo学习笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        多谢支持~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    
+	
+	<div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>泡菜 &copy; 2015 - 2019</span>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/buye110" target="_blank">Pickled cabbage</a>
+            </span>
+			
+        </p>
+    </div>
+
+	
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/2019/05/23/design-searchfile/&title=《本地文件检索设计》 — 知识涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/2019/05/23/design-searchfile/&title=《本地文件检索设计》 — 知识涓流&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/2019/05/23/design-searchfile/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《本地文件检索设计》 — 知识涓流&url=http://www.xmidou.com/2019/05/23/design-searchfile/&via=http://www.xmidou.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/2019/05/23/design-searchfile/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3a0U7DMAwF0P3/T49nNDqu7QyU9PSpKmHLKZJxbD8e8fV8ua6eX12vn3Z1/7p+2YWBgbEtI/n6ZFuTTfdeEwYGxt0YVxHsak3yJEEmAf393jAwMDCqa5JULyFhYGBgrGIkP82R/xZwMTAwNmEkh8n5pvMw/cGzOAYGxoaMvOr+9/cf6W9gYGBsxXgWr/eFtlWNyfKuMDAwjmZMUr2cNEkcC/vBwMA4lJEXtqrBdB6mC68PAwPjaMaCcvygwTlvZ/7wN8HAwDiU0WsSrCqczdNEDAyMOzB6B9TeAGsefKvBHQMD41RGHlgnQ1290YpCUwEDA+NoRh58V41HTIJy8xCLgYGxOeMTJbZ5OzNPWzEwMO7GyI+R1ZVrw2s0LYKBgXEQI0ng8vvCsGncpCznthgYGMcx8q/Mi27zl5L/7rfUEAMD42hGkor1gu/azyn/f8DAwLgB4/3KvBmZPO+1EApVQwwMjG0Z+VBFL0AnIXjymeXJEQwMjM0Z1WGIXqGtl1BGZTgMDIwbMKpF/0nK2BvLaPZFMTAwDmVUD7GrGgzV3f4ScDEwMI5g9DY0eVJtT0ZUDAyMoxm9vCvfUC/ULm5wYmBgHMHolcnyRDB/TaPDMAYGxg0Y+bRVUsSfJ47NszgGBgZGHC4nhbwkZSzPkWFgYNyYkWx6foaOhjAwMDBuwMjTu2qIzAe8kpULym0YGBgbMqohr9o2mK+fH30xMDC2ZXwBmppLqSP6tO8AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
