@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>谈谈云存储架构 | 知识涓流</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计,存储">
+    <meta name="description" content="谈谈云存储架构">
+<meta name="keywords" content="设计,存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈云存储架构">
+<meta property="og:url" content="http://www.xmidou.com/2019/08/14/cloudStorgeFamework/index.html">
+<meta property="og:site_name" content="知识涓流">
+<meta property="og:description" content="谈谈云存储架构">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-14T07:20:24.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈谈云存储架构">
+<meta name="twitter:description" content="谈谈云存储架构">
+    
+        <link rel="alternate" type="application/atom+xml" title="知识涓流" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">泡菜</h5>
+          <a href="mailto:buye110@hotmail.com" title="buye110@hotmail.com" class="mail">buye110@hotmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">谈谈云存储架构</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">谈谈云存储架构</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-14T07:17:49.000Z" itemprop="datePublished" class="page-time">
+  2019-08-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-cloudStorgeFamework" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">谈谈云存储架构</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-14 15:17:49" datetime="2019-08-14T07:17:49.000Z" itemprop="datePublished">2019-08-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在企业内部服务平台中，首先需要实现云存储功能，以提供各部门用户数据的存储功能，方便用户获取各自需要的数据，包括GPS、视频、语音等模拟和数字信息等数据。</p>
+<p>在企业内部服务平台中，首先需要实现云存储功能，以提供各部门用户数据的存储功能，方便用户获取各自需要的数据，包括GPS、视频、语音等模拟和数字信息等数据。其次需要接入消息与通讯系统，如350兆集群呼叫，手机、移动终端、 固话，及Mail，MSN、QQ、微信等即时通讯(IM Instant Messenger)，以实现动态消息推送和位置服务。第三是实现业务功能开发与运行，如在线播放云存储中的视频监控图像、照片及相关资料，以及各业务子系统的运行，为一线用户和领导提供分析和指挥决策依据。为此需要相应的基础软硬件资源，如服务器、存储和网络设备、操作系统和数据库等商用软件。企业云架构示意见图1。云存储、通讯及消息、业务运行系统和软硬件基础资源这四个基本要素构成了一个面向终端用户的操作系统平台，或称为企业云，其能够通过各种浏览器或手机App及PC机随时访问，满足用户在任意时刻、任意地点查看信息的需求。</p>
+<p>作为企业云的核心是存储和计算，其它都构建在存储和计算之上的基础服务和用户运用。企业云主要涉及数据存储架构和用户访问优化等两方面的技术，下面分别予以简述。</p>
+<p>云存储架构设计</p>
+<p>云存储主要是为了存储数据，方便用户访问，同时也是为了解决信息共享问题。在云存储建立之前，各业务部门均是自建专用系统，网络虽然相通，但由于数据分散存储在各自系统中，导致信息在业务协同时关联、互查和引用不流畅。以前各系统间的数据整合和共享主要靠交换接口标准化等SOA方式来实现[4]，对于非结构化数据几乎无法实现，且改造各子系统的工作量巨大和繁琐。</p>
+<p>采用云存储技术就可以克服上述问题，本文采用HDFS(Hadoop Distributed File System)分布式文件系统的存储方式，原各业务信息管理系统的数据通过Sqoop工具导入，HDFS实现数据层面的共享。HDFS包括主控服务器(同时配置备用主控服务器以便在故障时接管服务)，多个数据服务器(存储节点)，前端接入终端服务消息平台及各业务子系统数据库服务器。</p>
+<p>图2 分布式文件系统示意图</p>
+<p>主控服务器Master负责维护整个文件系统的命名空间与路由，以提供用户使用。该分布式系统架构***的缺点是主控服务器为单点结构，一旦出现故障将造成全系统瘫痪，故在实际应用中采用HA、UCARP等容灾备份，以便在故障时接管服务。主控服务器的命名空间结构采用目录树结构，建立元数据到数据服务器的映射关系，文件之间的关系等。为了提高检索效率，可以采取元数据内存化管理方式。主控服务器通过心跳线方式轮询数据服务器(DS)，当发现有DS宕机时，对一些副本数不足的文件(块)执行复制计划，也可根据DS数量增减需要执行副本迁移任务。</p>
+<p>数据服务器主要解决海量数据的低成本存储和快速检索，提高数据存储的安全性问题。其解决方案是将大块数据划分为小数据块，然后均匀分布到多台数据服务器上，每个数据服务器存储的文件数量就少了，对于大文件数据的处理方法是将大文件划分成多个相对较小的片段存储在多个数据服务器上，把单个数据服务器上存储的文件数降到单机能解决的规模，以此降低存储设备成本和提高效率，并通过多副本复制来提高数据安全性。</p>
+<p>终端服务平台</p>
+<p>企业协同作业的终端服务平台又称为“永远在线推送平台”(AOI Always Online Infrastructure)，该平台是以协同作业应用为导向，以指挥中心的“推送”技术为基础，为一线人员提供统一的消息推送服务，实现了将消息和内容实时推送到终端的全新体验。</p>
+<p>永远在线推送平台(AOI)包括终端中间件和在线服务器，终端中间件提供各类移动和固定终端的接入以及各终端间的通信路由功能;在线服务器提供统一的永远在线连接安全认证、消息缓存服务、在线业务处理子系统。终端服务消息平台示意图如下：</p>
+<p>其中，SIP(Session Initiation Protocol)网主要实现会话功能，这些会话可以是Internet多媒体会议、IP电话或多媒体分发，会话的参与者可以通过组播(multicast)、网状单播(unicast)或两者的混合体进行通信。</p>
+<p>XMPP(The Extensible Messaging and Presence Protocol)网主要用于服务类实时通讯，即时消息(IM)及在线现场探测[2]。XMPP的核心是XML流传输协议，借助于XML易于解析和阅读的特性，使得XMPP的协议能够允许网络用户简便和流畅地向其他用户发送信息。</p>
+<p>终端服务消息平台采用软交换技术(SS Software Switching)吸取了IP、ATM、IN、TDM等技术的优点，采用开放的分层体系结构，不但实现了各种通讯协议的兼容，更重要的是实现了业务系统的融合，为终端用户提供了统一的消息和内容服务接口。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-14T07:20:24.582Z" itemprop="dateUpdated">2019-08-14 15:20:24</time>
+</span><br>
+
+
+        
+        作者：泡菜
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.xmidou.com">
+            <img src="/img/avatar.jpg" alt="泡菜">
+            泡菜
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/存储/">存储</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/&title=《谈谈云存储架构》 — 知识涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/&title=《谈谈云存储架构》 — 知识涓流&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《谈谈云存储架构》 — 知识涓流&url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/&via=http://www.xmidou.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/14/cloudStorgePerformance/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">谈谈云存储性能优化</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/07/15/changLurlToSurl/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">URL长短变换</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        多谢支持~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    
+	
+	<div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>泡菜 &copy; 2015 - 2019</span>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/buye110" target="_blank">Pickled cabbage</a>
+            </span>
+			
+        </p>
+    </div>
+
+	
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/&title=《谈谈云存储架构》 — 知识涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/&title=《谈谈云存储架构》 — 知识涓流&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《谈谈云存储架构》 — 知识涓流&url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/&via=http://www.xmidou.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/2019/08/14/cloudStorgeFamework/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aQY7jIBAF0Nz/0hlpVmmN4vwPpDWGx8pyYvDzokRV8XjE4/l3vF6/jnf3X3+9nu3fGR7fGBgYGLdlPC9HvlhLHftkb2fAwMA4gJFP9+4TJCE1D7v5sxgYGBjX/0nCYo7HwMDA+EbAvSa1L42BgYFxzUiS2DzRHSvh/VIujoGBcUPG2iXXXn+9v4GBgfHfM57lGCu9JZ9m6q0wMDC2ZiRp5PUCyf2ZIxrFBhQDA+MYRj5FW/ofawMkLVIMDIwzGcXDcYFsLLzmG0oMDIwTGGNFsZkDFu2zH6gYGBhbM2Y2hflxirHAWjdKMTAwtmOMBbtvJMDtzD+uMTAwDmDMlM/GCvptovshiGNgYBzGyANi2/Jsg2lxsAMDA2NrRr4FbJPVNoCu+kAYGBj7McaK/u3LFTW/Mm0uMmkMDIzbMtojXGMBNA/lbWP1x1MYGBhbM/KF84Jau+1rN6bRWhgYGFsw8oXzo1pFaWxoS/ohicXAwNiOkTw8H2TH2qL5HQwMjL0ZSaI4s/saO0JRp8EYGBgHMNpmZJ4fj4XvutiHgYGxNWPVYYj2hVZtMTEwME5gPMuRhNGx9LUN4hgYGOcwxtqNeZFu7YvON00xMDDuy8iDbB5S54t0eQqNgYFxDiOfug2gq8ZUewADA+MYRl4CywNo207AwMDAWFbYWjpPdGgDAwPjAEZ7MKINu20LMw/cGBgYJzDmGwNtEX/+cwxiMDAw7sf4A5LUIuC6qWIuAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

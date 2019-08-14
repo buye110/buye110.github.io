@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>非结构化数据存储在容器中的持久化 | 知识涓流</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="设计,存储">
+    <meta name="description" content="非结构化数据存储在容器中的持久化">
+<meta name="keywords" content="设计,存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="非结构化数据存储在容器中的持久化">
+<meta property="og:url" content="http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/index.html">
+<meta property="og:site_name" content="知识涓流">
+<meta property="og:description" content="非结构化数据存储在容器中的持久化">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-14T08:08:30.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="非结构化数据存储在容器中的持久化">
+<meta name="twitter:description" content="非结构化数据存储在容器中的持久化">
+    
+        <link rel="alternate" type="application/atom+xml" title="知识涓流" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">泡菜</h5>
+          <a href="mailto:buye110@hotmail.com" title="buye110@hotmail.com" class="mail">buye110@hotmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">非结构化数据存储在容器中的持久化</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">非结构化数据存储在容器中的持久化</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-08-14T08:06:14.000Z" itemprop="datePublished" class="page-time">
+  2019-08-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-cloudStorgeDataPersistenceForContainer" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">非结构化数据存储在容器中的持久化</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-08-14 16:06:14" datetime="2019-08-14T08:06:14.000Z" itemprop="datePublished">2019-08-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在容器化应用程序设计中，每个容器间彼此隔离，独立扩展，并可作为处理某项大型网络应用的组件。有别于以往处理整个应用程序，大型的容器化应用程序可由数百个（甚至上千个）相关容器组合而成。这些应用程序支持敏捷设计、开发和部署方式。它们可以在生产环境中轻松扩展，非常适合于分布式、甚至基于云的混合式基础架构。</p>
+<p>IT领域，变革的速度令人瞠舌。快速增长的数据，云计算规模的处理，以及的物联网设备正在推动我们向着更高效、可靠和可扩展的方向发展。传统的应用架构已日趋极限，我们正试图努力开发部署的新方案。所幸的是，最被看好的容器化技术——这项据称能够解决许多问题的技术（如果不能算是全部的话）——正成为应对上述难题的妙药良方。</p>
+<p>在容器化应用程序设计中，每个容器间彼此隔离，独立扩展，并可作为处理某项大型网络应用的组件。有别于以往处理整个应用程序，大型的容器化应用程序可由数百个（甚至上千个）相关容器组合而成。这些应用程序支持敏捷设计、开发和部署方式。它们可以在生产环境中轻松扩展，非常适合于分布式、甚至基于云的混合式基础架构。</p>
+<p>遗憾的是，容器在最初设计中并非用于实现全堆栈应用程序，亦不适合需要长期储存数据的应用。容器的设计初衷是可以轻易地大规模创建、部署微服务的应用层，并将微服务视为一种高度敏捷的中间件，在概念上无需持久的存储数据。</p>
+<p>持之以恒</p>
+<p>由于容器方式具有很强的灵活性、易于扩展、高效性，并面向云计算，在许多情况下这都是一种经济的部署模式，因此现在人们希望将其应用范围扩展到微服务之外。容器架构提供了更好的方式来构建现代化的应用程序，我们看到许多商业软件和系统供应商在内部开发中转向容器形式，甚至将其广泛部署，而且通常在上层保持对最终用户和IT管理人员的透明。大多数名列财富100强的企业已经开始以容器形式进行生产环境的第三方IT应用托管，尤其在内部应用、融合架构和专用的基础架构领域。</p>
+<p>你或许会看到大型的、容器化的数据库，甚至存储系统的出现。然而，设计企业级的、长期存储数据的应用程序仍是不小的挑战，容器可能在分布式和混合基础架构中来回迁移。而数据需要控制、保护、受到管制和监督，所以很多时候持续数据存储需要更像是锚点那样，容器在这方面着实面临着短板。</p>
+<p>容器架构使用到三种类型的存储：是镜像存储。这可以利用现有的共享存储进行交付，要求类似于服务器虚拟化环境中虚拟机镜像分发保护的平台架构。容器镜像的一项好处在于其存储容量相较于完整的虚拟机镜像小了许多，因为它们不会复制操作系统代码。此外，容器镜像的运行在设计之初便是固定的，因此可以更高效地存储、共享。但也因此，容器镜像无法存储动态应用程序的数据。</p>
+<p>第二类需要存储的数据是容器的管理。当然，你同样可以借助现有存储完成这项工作。不论使用Docker、Kubernetes、Tectonic、Rancher还是其它类型的容器管理，都需要存储配置数据、日志记录等管理数据。</p>
+<p>还有第三类存储，容器应用的存储，是挑战的。只有支持真正的微服务式编程时，容器代码可以直接写入镜像目录和文件。但是容器使用一种分层文件系统，将所有新写入的数据存储在临时虚拟层，层的容器镜像却未被修改。一旦容器消失——相比虚拟机，容器的设计寿命更短——所有的临时存储都会随之消散。</p>
+<p>假如一个容器应用程序需要保存数据，一种方式是显示地在容器的全局命名空间内加载一个特定的系统数据卷——或在Kubernetes框架下的持久卷这样可以让容器直接方案读/写主机目录或文件系统。假如容器被关闭或重新启动，它依旧可以访问之前写入的，用于长期存放的数据。但这并不是一个简单易行的方式，需要考虑在容器之间共享数据，因此应用程序开发人员必须兼顾共享、锁定、争用和重启的问题。而且存储管理员如何甄别保护——快照、备份和灾难恢复产生的——成千上万由程序控制的海量数据。</p>
+<p>此外，假如容器集群中的某一个容器位于另一台主机，那么存储管理员需要确保共享或分布式文件系统（例如NFS）在所有的集群主机上均保持同样的配置，甚至应用程序员可能要添加更多与I/O相关的代码，从而确保可靠的集群级别的共享。所幸的是，专家级的存储管理员会选择将现有的企业级存储（如NAS和SAN）带入这个全新的容器领域。如果他们与开发人员紧密合作，可以实际配置出高端的企业级生产环境。</p>
+<p>不过，容器领域内的实践是让Agile DevOps具备相同的沙箱、测试与生产环境。从容器角度看，这种方式为最终用户提供动态配置，从而确保容器的移动和迁移。系统的存储配置越是静态和脆弱，容器化的好处便越是难以体现。</p>
+<p>Docker等容器管理产品提供可插拔的卷管理。例如Flocker是开源Docker可插拔卷中的的替代品，可以通过集群智能管理、迁移数据卷及其容器。虽然Flocker的主要赞助商ClusterHQ已不复存在，但我们预计这种功能将持续发展，并在基准容器平台内变得日益本土化；Rancher Labs的“Convoy”项目正朝着这个方向发展。大多数（如果不说全部的话）传统存储供应商和云存储服务提供商为其存储阵列生成各类容器系统卷插件，这不失为在存储上持续投资的好方法。</p>
+<p>存储即软件</p>
+<p>相较于尝试将旧版存储强制迁移到新的容器环境中，不断增长的替代方案会引发新一波的软件定义存储（SDS）风潮来完成这项工作。SDS由一个存储操作系统和完全部署为软件层的服务构成，该服务层通常作为虚拟机呈现，不过现在其越来越多地部署为容器模式。容器化软件存储的快速发展是很容易想见得到的，以便于容器化应用程序使用存储服务。</p>
+<p>相比在传统的生产环境中，服务器虚拟化环境通常基于大型而昂贵的主机集群，容器的托管体系架构能够轻松使用由更开放的、广泛而廉价的通用服务器组建起的私有、公有或混合云基础架构。这有些类似于Hadoop和Spark等大数据项目使用通用基础架构的优势，并且通过使用SDS和内存来讲我们从专用而昂贵的平台中释放出来。</p>
+<p>SDS的另一项核心优势特别针对Ceph，Torus和GlusterFS等分布式容器方案，将存储以最适合的方式交付给容器集群。管理诸如GlusterFS之类的技术对传统的SAN管理员而言可谓是一项挑战，但容器化存储与身居来具有各种诸如敏捷性、可扩展性和可用性方面的优势，同时通过本地化数据存储改善应用程序性能。</p>
+<p>简而言之，预融合和超融合容器设备使得内置本地容器存储功能（如Datera和Diamanti）变得更加简单。通过使用SDS来得到在同一平台设备格式下融合万物所需的灵活性和便捷性。虽然我们尚未有听到有企业真正在生产环境中使用融合容器托管方式，但未来的IT基础架构必将延续融合道路，同时建立更多云端服务。</p>
+<p>当然，IT人员的工作在于判断是否为某家供应商专有的技术买单，或是转向免费的开源代码，加以投资，并封闭在该领域。假如要得到经过预先集成、验证的企业级功能和全天候的技术支持，通常需要长期选定某家供应商的开源分发或预融合的堆栈。换句话说，这不仅是选择传统的哪家供应商，更是选择供应商专有还是开源的技术，或是完全依赖自己的开发。</p>
+<p>云端扩展的对象存储</p>
+<p>容器化应用程序往往采取云计算架构，其体系架构要根据外部工作负载情况的变化、增长而持续扩展内部的服务。这种基于云的理念同样渗透到现代应用程序开发人员调用存储的方式。许多新的容器化应用程序是针对对象存储的I / O，而非传统的文件系统或数据块编写的。</p>
+<p>大多数当前的容器环境在现实部署中平稳进行——当然在公有云中可谓例外，来自Hedvig、Qumulo和Scality等在线扩展对象存储恰好满足容器所需。在实施或迁移容器应用程序时，Amazon Web Services Simple Storage Service (S3)和类似的公有云已经开始将对象存储用作持久的存储层。</p>
+<p>面向未来</p>
+<p>我们尚未看到容器最终在数据存储方面会有怎样的表现。根据过去存储领域的发展演进经验来看，我们可能会看到“容器认知”存储的出现，其为容器配置而生，并配以适合的管理功能。就像虚拟机认知存储一样，我们应该还可以看到一项容器存储服务，可以保持数据并持续追溯——甚至在跨集群容器和跨云容器环境中。最终，我们期待看到使用服务器闪存和新兴的持续性闪存（如非易失性存储器快照）的容器认知缓存，并且和持续存储层相结合。</p>
+<p>希望未来的容器认知存储可以兼顾到所有关键的方面，从容器清单到应用蓝图。我们同样希望在未来完成多容器环境的存储管理，可以追溯、预测和优化存储订阅，以满足持续容器运作所需。另外，存储认知的存储需要能通过简单的策略机制，随时随地地保护到所有数据、确保高可用性和灾难恢复。</p>
+<p>以虚拟机形式呈现的服务器虚拟化花费了超过10年才替代掉企业数据中心中应用程序专用的物理服务器。现在，容器化应用程序似乎将会在一两年内替换许多完整的虚拟机应用。挑战在于我们能否为容器快速提供企业级持续性数据存储。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-14T08:08:30.303Z" itemprop="dateUpdated">2019-08-14 16:08:30</time>
+</span><br>
+
+
+        
+        作者：泡菜
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.xmidou.com">
+            <img src="/img/avatar.jpg" alt="泡菜">
+            泡菜
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/存储/">存储</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/&title=《非结构化数据存储在容器中的持久化》 — 知识涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/&title=《非结构化数据存储在容器中的持久化》 — 知识涓流&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《非结构化数据存储在容器中的持久化》 — 知识涓流&url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/&via=http://www.xmidou.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/08/14/cloudStorgePerformance/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">谈谈云存储性能优化</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        多谢支持~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    
+	
+	<div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>泡菜 &copy; 2015 - 2019</span>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/buye110" target="_blank">Pickled cabbage</a>
+            </span>
+			
+        </p>
+    </div>
+
+	
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/&title=《非结构化数据存储在容器中的持久化》 — 知识涓流&pic=http://www.xmidou.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/&title=《非结构化数据存储在容器中的持久化》 — 知识涓流&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《非结构化数据存储在容器中的持久化》 — 知识涓流&url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/&via=http://www.xmidou.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.xmidou.com/2019/08/14/cloudStorgeDataPersistenceForContainer/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aQXLbMBAEQP3/08kDHNIzuwSjQ/OkslgwGgfsaoDPJ37+/Hh+fnv//tUI95+vvn34wcPDw1tP/WroK14+oWQh7ueZzxkPDw/vNC8ZLn8nLwztOPl88PDw8L6Hd9/4zrbyfcnBw8PD+2ZeG1UkLfJsWfHw8PD+Ly8PW+8363xzbyOM41kLHh4eXte1Fpv4N3w+cr6Hh4eHtz5Vb4PXzerm7XIxWzw8PLwDvHzD3QSpSfPdttT5PPHw8PCe5W0On9rikZSTTUH6xwLh4eHhvcLLwfsQth2h/QseHh7eCV6+QW+C17YVzherPt/Dw8PDW/PuB21j2eRiVntZ4YELAXh4eHiP8pIIoI1fZ5t7+20eXuDh4eGd4LVHUJuCkS/BpvDg4eHhneNttuY8FJgdkrVhBx4eHt77vPzYfvbMAt+kFEVHX3h4eHgP8WY//vMNPV+a9kpWMTc8PDy813mzq06bye0P8PqX8PDw8Ca8FpDw2mOq/J36fA8PDw/vIV57rJVHBpu/5P/3l0YcDw8P7xgv/2HfttR5+XmqKcfDw8N7h7dpZFvSbOtvy8Nn1svj4eHhLXjtZYLNdt8ik1jkl8KAh4eHt+DljfJTUcWz8Uc0Nzw8PLzDvCQCmB195cdpefwRLRweHh7eYV57pSAvKkX8GkTJxcLh4eHhHeMlQ2xgm4C4TWXx8PDw3uTdb7uzUjF7f/ZcttR4eHh4D/FmR19JIzu7qtXGwXh4eHjv81b1ZHScloSweYTxOVgu8fDw8NKp58UgDyz2EUMbkQx/MeDh4eGVvLwtnk09b443Ne0yxsXDw8P7At4GM7suMAyF8fDw8L6Sl7S/m3C2zRbw8PDw3uFtgoD7d5LjrqcK0gOXrvDw8PAme28xiWQJ8rKRtOlHLm/h4eHhpby/1PVzqFNXrCQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
